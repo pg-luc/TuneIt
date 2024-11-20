@@ -1,2 +1,2 @@
 # TuneIt
-Spotify Clone
+Spotify clone for portfolio
