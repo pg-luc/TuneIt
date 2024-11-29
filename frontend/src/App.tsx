@@ -7,13 +7,15 @@ function App() {
       <h1 className="text-red-500 text-8xl" >Hello World!</h1>
       <header>
         <SignedOut>
-          <SignInButton />
+          <SignInButton>
+            <Button>Sign in</Button>
+          </SignInButton>
         </SignedOut>
         <SignedIn>
           <UserButton />
         </SignedIn>
       </header>
-      <Button>press me</Button>
+
     </div>
   )
 }
