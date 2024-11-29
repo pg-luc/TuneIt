@@ -1,6 +1,12 @@
 
 function App() {
-  return ()
+  return (
+    <>
+      <div>
+        FRONT END PAGE
+      </div>
+    </>
+  )
 }
 
 export default App
