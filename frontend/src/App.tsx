@@ -1,9 +1,12 @@
+import { Button } from "@/components/ui/button"
+
 function App() {
   return (
-    <div className="text-center p-4">
-      <h1 className="text-4xl font-bold text-blue-500">Hello, Tailwind!</h1>
+    <div>
+      <h1 className="text-red-500 text-8xl" >Hello World!</h1>
+      <Button>press me</Button>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
