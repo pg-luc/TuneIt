@@ -25,7 +25,8 @@ app.use("/api/songs", songs_route);
 app.use("/api/albums", albums_route);
 app.use("/api/stats", stats_route);
 
+// Connect to port and database
 app.listen(port, () => {
     console.log(`Application is listening on PORT: ${port}`);
     connectDB();
-})
+}) 
