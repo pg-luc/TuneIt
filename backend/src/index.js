@@ -1,4 +1,4 @@
-import express from "express";
+import express, { json } from "express";
 import dotenv from "dotenv";
 
 // Routes imports
@@ -16,6 +16,7 @@ import { connectDB } from "./lib/db.js";
 dotenv.config();
 const app = express();
 const port = process.env.PORT;
+app.use(express.json()); // Make express Parse json data
 
 // Routes setup
 app.use("/api/users", users_route);
