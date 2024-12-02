@@ -1,8 +1,10 @@
 import { Router } from "express";
-import { getMethod } from "../controllers/admin_controller.js";
+import { getAdmin } from "../controllers/admin_controller.js";
+import { protectRoute, requireAdmin } from "../middleware/auth_middleware.js";
 
 const router = Router();
 
-router.get("/", getMethod);
+// route to the admin page with authentication
+router.get("/", protectRoute, requireAdmin, getAdmin);
 
 export default router;

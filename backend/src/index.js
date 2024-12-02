@@ -1,4 +1,5 @@
 import express, { json } from "express";
+import { clerkMiddleware } from '@clerk/express'
 import dotenv from "dotenv";
 
 // Routes imports
@@ -12,11 +13,12 @@ import stats_route from "./routes/stats_route.js";
 //Database import
 import { connectDB } from "./lib/db.js";
 
-// Middleware
 dotenv.config();
 const app = express();
 const port = process.env.PORT;
 app.use(express.json()); // Make express Parse json data
+// checks the request's cookies and headers for a session JWT if found, attaches the Auth object to the request object under the auth key.
+app.use(clerkMiddleware())
 
 // Routes setup
 app.use("/api/users", users_route);
