@@ -7,4 +7,7 @@ const router = Router();
 // route to the admin page with authentication
 router.get("/", protectRoute, requireAdmin, getAdmin);
 
+// route to the admin page with authentication
+router.get("/", protectRoute, requireAdmin, createSong);
+
 export default router;
