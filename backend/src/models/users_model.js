@@ -13,6 +13,10 @@ export const userSchema = new mongoose.Schema({
 
     clerkID: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
     }
-}); 
+}, { timestamp: true });
+
+
+export const User = mongoose.model("User", userSchema);

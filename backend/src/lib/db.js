@@ -1,3 +1,5 @@
+// ====== FILE TO SETUP AND CONNECT TO MONGO DB ======
+
 import mongoose from "mongoose";
 
 export const connectDB = async () => {
