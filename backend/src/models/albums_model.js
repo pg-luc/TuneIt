@@ -9,11 +9,11 @@ export const albumsSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    songs: {
+    songs: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Song",
         required: true
-    },
+    }],
     imageURL: {
         type: String,
         required: true

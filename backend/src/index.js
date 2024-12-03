@@ -2,6 +2,7 @@ import express, { json } from "express";
 import fileUpload from "express-fileupload";
 import { clerkMiddleware } from '@clerk/express'
 import dotenv from "dotenv";
+import path, { dirname } from "path"; // this is a nodeJS module
 
 // Routes imports
 import users_route from "./routes/users_route.js";
@@ -17,11 +18,20 @@ import { connectDB } from "./lib/db.js";
 dotenv.config();
 const app = express();
 const port = process.env.PORT;
+const __dirname = path.resolve(); // makes the current working directory the ABSOLUTE path
+
 app.use(express.json()); // Make express Parse json data
+
 // checks the request's cookies and headers for a session JWT if found, attaches the Auth object to the request object under the auth key.
-app.use(clerkMiddleware())
+app.use(clerkMiddleware());
+
 // ExpressJS middleware for uploading files.
-app.use(fileUpload);
+app.use(fileUpload({
+    useTempFiles: true, // stores images in a temporary files rather than storing it in the RAM
+    tempFileDir: path.join(__dirname, "/tmp"),
+    createParentPath: true, // creates the directory path specified
+    limits: { fileSize: 10 * 1024 * 1024 }, // Limit file size to only 10mb with image size of 1024 x 1024
+}));
 
 // Routes setup
 app.use("/api/users", users_route);
