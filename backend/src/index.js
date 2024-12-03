@@ -1,4 +1,5 @@
 import express, { json } from "express";
+import fileUpload from "express-fileupload";
 import { clerkMiddleware } from '@clerk/express'
 import dotenv from "dotenv";
 
@@ -19,6 +20,8 @@ const port = process.env.PORT;
 app.use(express.json()); // Make express Parse json data
 // checks the request's cookies and headers for a session JWT if found, attaches the Auth object to the request object under the auth key.
 app.use(clerkMiddleware())
+// ExpressJS middleware for uploading files.
+app.use(fileUpload);
 
 // Routes setup
 app.use("/api/users", users_route);
