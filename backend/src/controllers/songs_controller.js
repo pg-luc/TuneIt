@@ -1,5 +1,6 @@
 import { Song } from "../models/songs_model.js";
 
+// Function to fetch a all songs for the Admin
 export const getAllSongs = async (req, res) => {
     try {
         // Get all songs from the database
@@ -62,12 +63,12 @@ export const getMadeForYouSongs = async (req, res) => {
             }
         ]);
 
-        console.log("Successfully fetched featured songs");
-        res.status(200).json({ message: "Successfully fetched featured songs" });
+        console.log("Successfully fetched made for you songs");
+        res.status(200).json({ message: "Successfully fetched made for you songs" });
     }
     catch (error) {
         // log errors if not successfully fetched
-        console.log("Failed! to fetch featured songs: ", error);
+        console.log("Failed! to fetch made for you songs: ", error);
         res.status(500).json({ success: false, message: "Internal server error: ", error });
     }
 }
@@ -89,12 +90,12 @@ export const getTrendingSongs = async (req, res) => {
             }
         ]);
 
-        console.log("Successfully fetched featured songs");
-        res.status(200).json({ message: "Successfully fetched featured songs" });
+        console.log("Successfully fetched trending songs");
+        res.status(200).json({ message: "Successfully fetched trending songs" });
     }
     catch (error) {
         // log errors if not successfully fetched
-        console.log("Failed! to fetch featured songs: ", error);
+        console.log("Failed! to fetch trending songs: ", error);
         res.status(500).json({ success: false, message: "Internal server error: ", error });
     }
 }

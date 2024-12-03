@@ -1,9 +1,10 @@
 import { Router } from "express";
+import { protectRoute } from "../middleware/auth_middleware.js";
+import { getAllUsers } from "../controllers/user_controller.js";
 
 const router = Router();
 
-router.get("/", (req, res) => {
-    res.send("User route GET method");
-});
+// Using the protectRoute to authenticate the user first
+router.get("/", protectRoute, getAllUsers);
 
 export default router;

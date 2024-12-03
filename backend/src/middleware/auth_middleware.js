@@ -2,7 +2,7 @@ import { clerkClient } from "@clerk/express";
 
 // Function to check if the user is an aunthenticated and registered user
 export const protectRoute = async (req, res, next) => {
-    // check the request body if there is a authentication and user id to see if the user is a valid/registered user
+    // check the request body if there is an authentication and user id to see if the user is a valid/registered user
     if (!req.auth.userId) {
         res.status(401).Json({ message: "Unauthorized user!" });
         return; // Terminates the session
