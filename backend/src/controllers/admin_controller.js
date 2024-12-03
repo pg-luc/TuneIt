@@ -73,14 +73,21 @@ export const createSong = async (req, res) => {
         res.status(500).json({ success: false, message: "Internal server error: ", error });
     }
 }
-
+// Function for when a song is deleted
 export const deleteSong = async (req, res) => {
     try {
         // Extract the song ID from req
         const { id } = req.params;
 
+        // If the song id is not provided
+        if (!id) {
+            return res.status(400).json({ message: "Please provide a valid Song id" });
+        }
+
         // Get song details from database
         const song = await Song.findById(id);
+
+        //
 
         // Check to see if the song is tied to an album
         if (song.albumID) {
@@ -102,4 +109,63 @@ export const deleteSong = async (req, res) => {
         res.status(500).json({ success: false, message: "Internal server error: ", error });
     }
 
+}
+
+// Function for when an album is created
+export const createAlbum = async (req, res) => {
+    try {
+        // Extract album info from the request body
+        const { title, artist, releaseYear } = req.body;
+
+        // Extract the image from the request body
+        const imageFile = req.files.imageFile;
+
+        // Then upload to cloudinary 
+        const imageURL = await cloudinaryUpload(imageFile);
+
+        // then created an album object to be uploaded to the database
+        const album = new Album({
+            title,
+            artist,
+            imageURL,
+            releaseYear
+        });
+
+        // Save new album into database
+        await album.save();
+
+        res.status(201).json({ message: `${album.title} has been created` })
+    }
+    catch (error) {
+        // log errors if not successfully deleted
+        console.log("Failed! to create album: ", error);
+        res.status(500).json({ success: false, message: "Internal server error: ", error });
+    }
+
+}
+
+// Function for when an album is deleted
+export const deleteAlbum = async (req, res) => {
+    try {
+        // Get the album id
+        const { id } = req.params;
+
+        // If the album id is not provided
+        if (!id) {
+            return res.status(400).json({ message: "Please provide a valid Album id" });
+        }
+
+        // Go through all the Song documents in the collection and delete anything with the album ID
+        await Song.deleteMany({ "albumID": id });
+
+        // then delete the album itself
+        await Album.findByIdAndDelete(id);
+
+        res.status(200).json({ message: `${Album._id.title} succesfully deleted` });
+    }
+    catch (error) {
+        // log errors if not successfully deleted
+        console.log("Failed! to delete album: ", error);
+        res.status(500).json({ success: false, message: "Internal server error: ", error });
+    }
 }

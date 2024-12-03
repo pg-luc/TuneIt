@@ -11,8 +11,12 @@ const router = Router();
 
 // Route for posting/creating and uploading a new song
 router.post("/songs", protectRoute, requireAdmin, createSong);
-
 // Route for deleting song
 router.post("/songs/:id", protectRoute, requireAdmin, deleteSong);
+
+// Route for posting/creating and uploading a new song
+router.post("/albums", protectRoute, requireAdmin, createAlbum);
+// Route for deleting song
+router.post("/albums/:id", protectRoute, requireAdmin, deleteAlbum);
 
 export default router;
