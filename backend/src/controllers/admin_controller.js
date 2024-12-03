@@ -2,6 +2,11 @@ import { Song } from "../models/songs_model.js";
 import { Album } from "../models/albums_model.js";
 import { v2 as cloudinary } from 'cloudinary'
 
+// Function to check if you are an admin
+const checkAdmin = async (req, res) => {
+    res.status(200).json({ admin: true });
+}
+
 // Function to upload to Cloudinary
 const cloudinaryUpload = async (file) => {
     try {
