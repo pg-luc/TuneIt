@@ -3,6 +3,7 @@ import { Album } from "../models/albums_model.js"
 import { User } from "../models/users_model.js"
 
 export const getAllStats = async (req, res) => {
+    // Using the Promise.all to make the counting of documents happen simultaneously 
     try {
         const [totalSongs, totalAlbums, totalUsers, totalArtist] = await Promise.all([
             // Use the countDocuments function to count how many objects are inside the database
