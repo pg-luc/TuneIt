@@ -1,8 +1,9 @@
 import { useAuth } from "@clerk/clerk-react"
 import { useEffect, useState } from "react";
 import { axiosInstance } from "@/lib/axios";
+import { Loader } from "lucide-react";
 
-function Auth_Provider() {
+export const Auth_Provider = ({ children }: { children: React.ReactNode }) => {
     const { getToken } = useAuth();
     const [loading, setLoading] = useState(true);
 
@@ -29,7 +30,7 @@ function Auth_Provider() {
                 updateApiToken(token);
             }
             catch (error) {
-                updateApiToken(null);
+                updateApiToken(null); // pass a null value to the token to show that the user is not authenticated
                 console.log("Error in Authentication Initiliazation: ", error);
             }
             finally {
@@ -46,17 +47,17 @@ function Auth_Provider() {
     if (loading === true) {
         return (
             <div className="h-screen w-full items-center justify-center" >
-                <h1 className="size-10 text-indigo-500 animate-spin">I am loaidng ...</h1>
+                <Loader className="size-10 text-indigo-500 animate-spin" />
             </div>
         )
+
     }
 
     return (
         <div>
-            AuthProvider
+            {children}
         </div>
     )
 
 }
 
-export default Auth_Provider
