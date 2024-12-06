@@ -47,7 +47,7 @@ export const Auth_Provider = ({ children }: { children: React.ReactNode }) => {
     if (loading === true) {
         return (
             <div className="h-screen w-full items-center justify-center" >
-                <Loader className="size-10 text-indigo-500 animate-spin" />
+                <Loader className="size-10 text-indigo-400 animate-spin" />
             </div>
         )
 
